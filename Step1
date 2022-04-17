@@ -1,0 +1,45 @@
+import numpy as np
+
+grid = [[0,0,0,0],[99,0,0,0],[0,0,0,0],[0,0,0,0]]
+start = [0,0]
+finish = [3,3]
+move = [[1,0],[0,1],[-1,0],[0,-1]]
+
+def printmap(grid):
+    vnames = [name for name in globals() if globals()[name] is grid]
+    print(vnames)
+    for i in range(len(grid)):
+        print(grid[i])
+def search(grid,start,finish,move):
+    closed = [[0 for row in range(len(grid[0]))] for col in range(len(grid))]
+    count = 1
+    x = start[0]
+    y = start[1]
+    open = [[x,y,0]]
+    grid[x][y]=1
+    notfinish = True
+    notfound = True
+
+    while notfinish and notfound :
+        #print(x,y,finish)
+        if open:
+            open1 = open.pop(0)
+            for i in range(len(move)):
+                x = open1[0]+move[i][0]
+                y = open1[1]+move[i][1]
+                if (finish[0] == x and finish[1] == y):
+                    notfinish = False
+                    #print('sudah finish')
+                if(x>=0 and x<len(grid) and y>=0 and y<len(grid[1]) and grid[x][y]==0):
+                    closed[x][y] = count
+                    grid[x][y]=1
+                    open.append([x,y,count])
+                    count += 1
+        else:
+            notfound = False
+            print('finish not found')
+    return closed
+
+
+step = search(grid,start,finish,move)
+printmap(step)
