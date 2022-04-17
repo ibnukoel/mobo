@@ -1,0 +1,70 @@
+import numpy as np
+
+grid = [[0,0,0,0],[99,0,0,0],[0,0,0,0],[0,0,0,0]]
+movement = grid
+start = [0,0]
+finish = [3,3]
+move = [[1,0,'bawah'],[0,1,'kanan'],[-1,0,'atas'],[0,-1,'kiri']]
+moveRobot =[[1,'stop',start[0],start[1]]]
+
+def printmap(grid):
+    vnames = [name for name in globals() if globals()[name] is grid]
+    print(vnames)
+    for i in range(len(grid)):
+        print(grid[i])
+def search(grid,start,finish,move):
+    closed = [[0 for row in range(len(grid[0]))] for col in range(len(grid))]
+
+    count = 1
+    x = start[0]
+    y = start[1]
+    open = [[x,y,0]]
+    grid[x][y]=count
+    notfinish = True
+    notfound = True
+
+    while notfinish and notfound :
+        #print(x,y,finish)
+        if open:
+            open1 = open.pop(0)
+            for i in range(len(move)):
+                x = open1[0]+move[i][0]
+                y = open1[1]+move[i][1]
+                if (finish[0] == x and finish[1] == y):
+                    notfinish = False
+                    #print('sudah finish')
+                if(x>=0 and x<len(grid) and y>=0 and y<len(grid[1]) and grid[x][y]==0):
+                    count += 1
+                    movement[x][y] = count
+                    closed[x][y]=1
+                    open.append([x,y,count])
+        else:
+            notfound = False
+            print('finish not found')
+    return movement
+def robotMovement (moveRobot, finish, move,step) :
+    reachgoal = True
+    while reachgoal:
+        moveCal = []
+        for i in range(len(move)):
+            x = moveRobot[0][2]+move[i][0]
+            y = moveRobot[0][3]+move[i][1]
+            if(x>=0 and x<len(grid) and y>=0 and y<len(grid[1]) and step[x][y]<99):
+                moveCal.append([step[x][y],move[i][2],x,y])
+                if x >= finish[0] and y >= finish[1]:
+                    reachgoal = False
+        moveCal.sort()
+        moveCal.reverse()
+        moveRobot.append(moveCal.pop(0))
+        moveRobot.sort()
+        moveRobot.reverse()
+    moveRobot.sort()
+    moveRobot.pop(0)
+    print(moveRobot)
+    return moveRobot
+
+step = search(movement,start,finish,move)
+printmap(step)
+robotMovement (moveRobot, finish, move,step)
+
+
