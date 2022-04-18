@@ -1,0 +1,44 @@
+#VRML_SIM R2022a utf8
+WorldInfo {
+  info [
+    "The model of the E-puck robot"
+  ]
+  title "E-puck simulation"
+}
+Viewpoint {
+  orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0944
+  position -1.2643455831928099 1.2934188218571963 2.038570202282033
+  follow "e-puck"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 4 4
+  floorTileSize 1 1
+}
+E-puck {
+  translation -1.5000000000178615 1.5000000000129765 -5.595692875446506e-05
+  rotation 1.260801689805448e-09 1.2597178538707665e-09 1 1.5699999998998309
+  controller "astar1"
+  version "2"
+  turretSlot [
+    Solid {
+      translation 0.01 0 0
+      children [
+        Shape {
+          appearance Appearance {
+          }
+          geometry Box {
+            size 0.07 0.07 0.001
+          }
+        }
+      ]
+    }
+  ]
+  groundSensorsSlot [
+    InertialUnit {
+    }
+  ]
+}
