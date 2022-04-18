@@ -124,7 +124,7 @@ def robot_movement(RotEnc, RotEnc_new, enc_unit, pose):
         motor_shift[i] = RotEnc_new[i] - RotEnc[i]  # menghitung pergeseran rotaty
         jarak[i] = motor_shift[i] * enc_unit  # menghitung jarak pergeseran robot
     v = (jarak[0] + jarak[1]) / 2
-    w = (jarak[1] - jarak[0]) / 5.2
+    w = (jarak[0] - jarak[1]) / 52
     pose[0] += v * math.cos(pose[2])
     pose[1] += v * math.sin(pose[2])
     pose[2] += w
@@ -207,6 +207,7 @@ x = init[1]
 y = init[0]
 movingforward = 1
 finished = 0
+i = 0
 # expand = search(grid,init,goal,hitung)
 while robot.step(timestep) != -1:
     # keyboard Control
@@ -214,15 +215,15 @@ while robot.step(timestep) != -1:
     # speed = keyPress(key_in)
     # leftMotor.setVelocity(speed[0])
     # rightMotor.setVelocity(speed[1])
-    i = 0
+    
     arah = get_direction()
     arahRobot = arah[0]
-    print(round(arahRobot))
-    print(movementRobot[i][1])
+    #print(round(arahRobot))
+    #print(movementRobot[i][1])
 
     # cek posisi robot terhadap hasil path planing
     if arahRobot >= movementRobot[i][1] - 0.5 and arahRobot <= movementRobot[i][1]+0.5:
-        print('maju')
+        #print('maju')
         leftMotor.setVelocity(3)
         rightMotor.setVelocity(3)
         #kalkulasi pergerakan robot
@@ -240,26 +241,30 @@ while robot.step(timestep) != -1:
         print(movementRobot[i][1])
         
     #cek posisi di map
-    print(init)
-    print(x,y)
+    #print(init)
+    #print(x,y)
     x2 = abs(pose[1])
     y2 = abs(pose[0])
     x4 = math.floor(x2/25)
     y4 = math.floor(y2/25)
     x3 = x4
     y3 = y4
-    print(x2,y2)
-    print(x4,y4)
-    print(x3,y3)
+    print('x3 y3 = ',x3,y3)
+    #print(x2,y2)
+    #print(x4,y4)
     
+
     if x!=x3 or y!=y3:
         map[x][y] = ' ' 
         map[x3][y3]='#'
         print('updatemap')
-        x=x3
-        y=y3
+        x = x3
+        y = y3
+        if x == movementRobot[i][2] and y==movementRobot[i][3]:
+            i+=1
+            print('next grid')
         
-    printmap(map)
+        printmap(map)
     
         
     # print('arah sudah benar')
