@@ -1,0 +1,53 @@
+#VRML_SIM R2022a utf8
+WorldInfo {
+  info [
+    "The model of the E-puck robot"
+  ]
+  title "E-puck simulation"
+}
+Viewpoint {
+  orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0944
+  position 0.7580860120940753 -0.5179460896817999 2.3999792748699957
+  follow "e-puck"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorTileSize 0.25 0.25
+}
+E-puck {
+  hidden position_0_0 75.85598856453176
+  hidden position_0_1 70.5760112182211
+  hidden linearVelocity_0 1.3949046881047532e-06 -0.00019216306313075396 -1.4291709176677623e-08
+  hidden angularVelocity_0 0.0128108510795607 9.299350212611783e-05 -2.889250786434051e-11
+  hidden rotation_1 0 0.9999999999999999 0 0.45776487837671886
+  hidden linearVelocity_1 1.8598693730363148e-06 -0.0002562169294780972 -2.8686431009865587e-11
+  hidden angularVelocity_1 0.012810851075709728 9.299350163600718e-05 1.1006262531921766e-10
+  hidden rotation_2 0 -0.9999999999999999 0 4.822212467933941
+  hidden linearVelocity_2 1.8598693684568799e-06 -0.0002562169284064621 -2.740354617844502e-11
+  hidden angularVelocity_2 0.012810851075662833 9.299350240054218e-05 -1.6784895818097965e-10
+  translation 0.352874420616511 -0.36358599329164965 -5.5958153222580506e-05
+  rotation 4.0648624305501556e-05 4.094338477462204e-05 -0.9999999983356642 1.5635374942697904
+  controller "astar"
+  version "2"
+  turretSlot [
+    Solid {
+      translation 0.01 0 0
+      children [
+        Shape {
+          appearance Appearance {
+          }
+          geometry Box {
+            size 0.07 0.07 0.001
+          }
+        }
+      ]
+    }
+  ]
+  groundSensorsSlot [
+    InertialUnit {
+    }
+  ]
+}
