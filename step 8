@@ -1,0 +1,43 @@
+import cv2
+import math
+import numpy as np
+
+
+img = cv2.imread("rectangles.jpg")
+
+def lsd_process(img):
+    #Create default parametrization LSD
+    lsd = cv2.createLineSegmentDetector(0)
+
+    #Detect lines in the image
+    lines = lsd.detect(img)[0]
+    #Draw detected lines in the image
+    drawn_img = lsd.drawSegments(img,lines)
+
+    #Show image
+
+    cv2.imshow("LSD",drawn_img )
+    cv2.waitKey(0)
+    return drawn_img
+
+def HLT_process(img):
+    dst = cv2.Canny(img, 50, 200, None, 3)
+    cv2.imshow("canny",dst)
+    lines = cv2.HoughLines(dst, 1, np.pi / 180, 150, None, 0, 0)
+    if lines is not None:
+        for i in range(0, len(lines)):
+            rho = lines[i][0][0]
+            theta = lines[i][0][1]
+            a = math.cos(theta)
+            b = math.sin(theta)
+            x0 = a * rho
+            y0 = b * rho
+            pt1 = (int(x0 + 1000 * (-b)), int(y0 + 1000 * (a)))
+            pt2 = (int(x0 - 1000 * (-b)), int(y0 - 1000 * (a)))
+            cv2.line(img, pt1, pt2, (0, 255, 0), 3, cv2.LINE_AA)
+    print(lines)
+    cv2.imshow("HLT",img)
+    cv2.waitKey()
+
+cv2.imshow("ori",img)
+HLT_process(img)
