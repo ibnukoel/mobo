@@ -1,0 +1,7 @@
+import time
+
+st = time.time()
+main("21.jpg")
+et = time.time()
+result = et - st
+print(result * 1000)
