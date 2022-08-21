@@ -1,0 +1,165 @@
+#VRML_SIM R2022a utf8
+WorldInfo {
+  info [
+    "The model of the E-puck robot"
+  ]
+  title "E-puck simulation"
+}
+Viewpoint {
+  fieldOfView 1
+  orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0944
+  position 0.060753860634330546 0.26070714251547966 1.114108915162517
+  follow "e-puck"
+}
+Transform {
+  translation -0.125 0 0.0001
+  children [
+    Transform {
+      translation -0.375 0.25 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.960784 0.47451 0
+            }
+          }
+          geometry Plane {
+            size 0.75 0.005
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.25 0.499 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.960784 0.47451 0
+            }
+          }
+          geometry Plane {
+            size 0.75 0.005
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.25 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.960784 0.47451 0
+            }
+          }
+          geometry Plane {
+            size 0.75 0.005
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0.125 0.125 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.960784 0.47451 0
+            }
+          }
+          geometry Plane {
+            size 0.005 0.75
+          }
+        }
+      ]
+    }
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.960784 0.47451 0
+        }
+      }
+      geometry Plane {
+        size 0.005 0.505
+      }
+    }
+  ]
+}
+RectangleArena {
+  floorTileSize 0.25 0.25
+  floorAppearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        ""
+      ]
+    }
+    roughness 1
+    roughnessMap ImageTexture {
+      url [
+        "https://raw.githubusercontent.com/cyberbotics/webots/R2022a/projects/appearances/protos/textures/parquetry/chequered_parquetry_roughness.jpg"
+      ]
+    }
+    metalness 0
+    normalMap ImageTexture {
+      url [
+        "https://raw.githubusercontent.com/cyberbotics/webots/R2022a/projects/appearances/protos/textures/parquetry/chequered_parquetry_normal.jpg"
+      ]
+    }
+    occlusionMap ImageTexture {
+      url [
+        "https://raw.githubusercontent.com/cyberbotics/webots/R2022a/projects/appearances/protos/textures/parquetry/chequered_parquetry_occlusion.jpg"
+      ]
+    }
+  }
+  wallHeight 0.001
+}
+DEF robotku E-puck {
+  hidden position_0_0 1.605157955663315e-12
+  hidden position_0_1 8.414689683434492e-13
+  translation -0.4374999999122586 0.4374999999543597 -5.5948427008175455e-05
+  rotation 4.743309875010108e-06 1.7943291210491614e-05 -0.9999999998277697 0.5163449265283373
+  controller "AStar"
+  supervisor TRUE
+  version "2"
+  camera_fieldOfView 0.888
+  camera_width 160
+  camera_height 120
+  camera_antiAliasing TRUE
+  camera_rotation 0 1 0 0.45
+  turretSlot [
+    GPS {
+      translation 0.0095 0 0
+    }
+    Solid {
+      translation 0.01 0 0
+      children [
+        Shape {
+          appearance Appearance {
+          }
+          geometry Box {
+            size 0.07 0.07 0.001
+          }
+        }
+      ]
+    }
+  ]
+  groundSensorsSlot [
+    InertialUnit {
+    }
+  ]
+}
+Ceiling {
+  translation 0 0 1.4
+}
+CeilingLight {
+  translation 0 0 1.4
+}
+CeilingLight {
+  translation 0 0 1.4
+  name "ceiling light(1)"
+}
+CeilingLight {
+  translation 0 0 1.4
+  name "ceiling light(2)"
+}
